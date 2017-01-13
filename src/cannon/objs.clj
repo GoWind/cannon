@@ -12,7 +12,6 @@
   [n]
   (int (Math/pow (Math/ceil (Math/sqrt n)) 2)))
 
-
 (defn get-size
   [mat]
   (let [rows (count mat)
@@ -70,7 +69,7 @@
   [m pad-size]
   (let [rows (count m)]
     (if (> pad-size rows)
-      (concat (pad-cols-with-zeroes m pad-size) (rows-of-zeroes (- pad-size rows) pad-size))
+      (vec (concat (pad-cols-with-zeroes m pad-size) (rows-of-zeroes (- pad-size rows) pad-size)))
       (pad-cols-with-zeroes m pad-size))))
 
 
@@ -89,12 +88,12 @@
   [ma mb]
   (let [mbc (row-major->col-major mb)
         cols (count (nth mb 0))]
-  (partition
-    cols
-    (->>
-      (for [r ma
-            c mbc]
-           (dot-product r c))))))
+   (partition
+     cols
+     (->>
+       (for [r ma
+             c mbc]
+            (dot-product r c))))))
 
 
 (defn get-submatrix
@@ -149,5 +148,5 @@
   [m p]
   (let [padded-matrix (pad-matrix m (* p p))
         submatrices (get-submatrices padded-matrix p)
-        aligned-matrix (align-up m p)]
+        aligned-matrix (align-up submatrices p)]
     aligned-matrix))

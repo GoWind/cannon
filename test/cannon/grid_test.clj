@@ -6,5 +6,3 @@
 (def vec-of-ints (into [] (range 64)))
 (def side-len 8)
 
-(deftest test-grid-fns
-  (is (

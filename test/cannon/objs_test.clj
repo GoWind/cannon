@@ -59,7 +59,19 @@
   (is (= [3 3] (objs/get-size [[1 2 3] [4 5 6] [7 8 9]])))
   (is (= [2 3] (objs/get-size [[1 2 3] [4 5 6]]))))
 
+(deftest prepare-tests
+  (is (=   {[0 0] [[1 2] [4 5]]
+            [0 1] [[3 0] [6 0]]
+            [1 0] [[9 0] [0 0]]
+            [1 1] [[7 8] [0 0]]}
+            (objs/prepare-matrix-a [[1 2 3] [4 5 6] [7 8 9]] 2)))
+  (is (= {[0 0] [[8 7] [2 1]]
+           [0 1] [[6 0] [0 0]]
+           [1 0] [[5 2] [0 0]]
+           [1 1] [[3 0] [4 0]] }
+        (objs/prepare-matrix-b [[8 7 3] [2 1 4] [5 2 6]] 2))))
 (deftest multiply-tests
   (is (= true (objs/can-multiply? [[1 2 3] [4 5 6]] [[1 2] [3 4] [5 6]])))
   (is (= false (objs/can-multiply? [[1 2 3] [4 5 6]] [[1 2 3] [4 5 6]])))
   (is (= true (objs/can-multiply? [[1 2] [3 4]] [[1 2] [3 4]]))))
+
